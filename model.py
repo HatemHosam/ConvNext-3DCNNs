@@ -9,7 +9,7 @@ def generate_model(opt):
                          'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext']
 
     if opt.model == 'convnext':
-        model = ConvNext3D.convnext_xtiny()
+        model = ConvNext3D.convnext_tiny()
     elif opt.model == 'c3d':
         from models.c3d import get_fine_tuning_parameters
         model = c3d.get_model(
