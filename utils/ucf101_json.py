@@ -31,7 +31,7 @@ def load_labels(label_csv_path):
     data = pd.read_csv(label_csv_path, delimiter=' ', header=None)
     labels = []
     for i in range(data.shape[0]):
-        labels.append(data.ix[i, 1])
+        labels.append(data.loc[i, 1])
     return labels
 
 def convert_ucf101_csv_to_activitynet_json(label_csv_path, train_csv_path, 
