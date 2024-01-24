@@ -8,8 +8,9 @@ def generate_model(opt):
     assert opt.model in ['c3d', 'squeezenet', 'mobilenet', 'resnext', 'resnet',
                          'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext']
 
-
-    if opt.model == 'c3d':
+    if opt.model == 'convnext':
+        model = ConvNext3D.convnext_xtiny()
+    elif opt.model == 'c3d':
         from models.c3d import get_fine_tuning_parameters
         model = c3d.get_model(
             num_classes=opt.n_classes,
