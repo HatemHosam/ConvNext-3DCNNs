@@ -10,7 +10,7 @@ def convert_csv_to_dict(csv_path, subset):
     key_labels = []
     for i in range(data.shape[0]):
         row = data.loc[i, :]
-        slash_rows = data.ix[i, 0].split('/')
+        slash_rows = data.loc[i, 0].split('/')
         class_name = slash_rows[0]
         basename = slash_rows[1].split('.')[0]
         
