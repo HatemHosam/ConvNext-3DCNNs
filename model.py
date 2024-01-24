@@ -1,12 +1,12 @@
 import torch
 from torch import nn
 
-from models import c3d, squeezenet, mobilenet, shufflenet, mobilenetv2, shufflenetv2, resnext, resnet
+from models import c3d, squeezenet, mobilenet, shufflenet, mobilenetv2, shufflenetv2, resnext, resnet, ConvNext3D
 
 
 def generate_model(opt):
     assert opt.model in ['c3d', 'squeezenet', 'mobilenet', 'resnext', 'resnet',
-                         'shufflenet', 'mobilenetv2', 'shufflenetv2']
+                         'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext']
 
 
     if opt.model == 'c3d':
