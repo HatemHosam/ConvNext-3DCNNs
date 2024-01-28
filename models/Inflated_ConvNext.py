@@ -148,7 +148,7 @@ model_urls = {
 }
 
 @register_model
-def convnext_tiny(pretrained=True,in_22k=False, **kwargs):
+def convnext_tiny_2d(pretrained=True,in_22k=False, **kwargs):
     model = ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768])
     if pretrained:
         url = model_urls['convnext_tiny_22k'] if in_22k else model_urls['convnext_tiny_1k']
@@ -301,4 +301,4 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     return C3D_model
 
 
-Inflated_ConvNext3D = copy_weights_2d_to_3d(convnext_tiny(), ConvNeXt3D())
+Inflated_ConvNext3D = copy_weights_2d_to_3d(convnext_tiny_2d(), ConvNeXt3D())
