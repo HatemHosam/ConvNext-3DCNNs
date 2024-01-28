@@ -8,7 +8,7 @@ def generate_model(opt):
     assert opt.model in ['c3d', 'squeezenet', 'mobilenet', 'resnext', 'resnet',
                          'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext', 'inflated_convnext']
     if opt.model == 'inflated_convnext':
-        model = Inflated_ConvNext    
+        model = Inflated_ConvNext()  
     elif opt.model == 'convnext':
         model = ConvNext3D.convnext_tiny()
     elif opt.model == 'c3d':
