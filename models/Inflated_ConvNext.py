@@ -263,24 +263,34 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     """
     # Copy stem weights
     C3D_model.downsample_layers[0][0].weight.data = C2D_model.downsample_layers[0][0].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[0][0].weight.shape[2], 1, 1)
-    C3D_model.downsample_layers[0][0].bias.data = C2D_model.downsample_layers[0][0].bias.data
+    try:
+    	C3D_model.downsample_layers[0][0].bias.data = C2D_model.downsample_layers[0][0].bias.data
+    except: pass
 
     for i in range(3):
         # Copy downsample layer weights
         C3D_model.downsample_layers[i][0][1].weight.data = C2D_model.downsample_layers[i][0][1].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[i][0][1].weight.shape[2], 1, 1)
-        C3D_model.downsample_layers[i][0][1].bias.data = C2D_model.downsample_layers[i][0][1].bias.data
+	try:
+            C3D_model.downsample_layers[i][0][1].bias.data = C2D_model.downsample_layers[i][0][1].bias.data
+        except: pass
 
     # Copy block weights
     for i in range(4):
         for j in range(len(C3D_model.stages[i])):
             C3D_model.stages[i][j].dwconv.weight.data[:, :, 3, :, :] = C2D_model.stages[i][j].dwconv.weight.data
-            C3D_model.stages[i][j].dwconv.bias.data = C2D_model.stages[i][j].dwconv.bias.data
+	    try:
+            	C3D_model.stages[i][j].dwconv.bias.data = C2D_model.stages[i][j].dwconv.bias.data
+            except: pass
 
             C3D_model.stages[i][j].pwconv1.weight.data = C2D_model.stages[i][j].pwconv1.weight.data.unsqueeze(2).repeat(1, 1, C3D_model.stages[i][j].pwconv1.weight.shape[2], 1, 1)
-            C3D_model.stages[i][j].pwconv1.bias.data = C2D_model.stages[i][j].pwconv1.bias.data
+	    try:
+                C3D_model.stages[i][j].pwconv1.bias.data = C2D_model.stages[i][j].pwconv1.bias.data
+	    except: pass
 
             C3D_model.stages[i][j].pwconv2.weight.data = C2D_model.stages[i][j].pwconv2.weight.data.unsqueeze(2).repeat(1, 1, C3D_model.stages[i][j].pwconv2.weight.shape[2], 1, 1)
-            C3D_model.stages[i][j].pwconv2.bias.data = C2D_model.stages[i][j].pwconv2.bias.data
+	    try:
+            	C3D_model.stages[i][j].pwconv2.bias.data = C2D_model.stages[i][j].pwconv2.bias.data
+            except: pass
 
     # Copy head weights
     #C3D_model.head.weight.data = C2D_model.head.weight.data
