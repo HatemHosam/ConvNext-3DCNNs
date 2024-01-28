@@ -233,7 +233,7 @@ class ConvNeXt3D(nn.Module):
         for i in range(4):
             x = self.downsample_layers[i](x)
             x = self.stages[i](x)
-        return self.norm(x.mean([-2, -1])) 
+        return self.norm(x.mean([-3, -2, -1])) 
 
     def forward(self, x):
         x = self.forward_features(x)
