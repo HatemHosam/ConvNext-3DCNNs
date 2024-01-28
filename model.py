@@ -1,14 +1,15 @@
 import torch
 from torch import nn
 
-from models import c3d, squeezenet, mobilenet, shufflenet, mobilenetv2, shufflenetv2, resnext, resnet, ConvNext3D
+from models import c3d, squeezenet, mobilenet, shufflenet, mobilenetv2, shufflenetv2, resnext, resnet, ConvNext3D, Inflated_ConvNext
 
 
 def generate_model(opt):
     assert opt.model in ['c3d', 'squeezenet', 'mobilenet', 'resnext', 'resnet',
                          'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext']
-
-    if opt.model == 'convnext':
+    if opt.model == 'inflated_convnext':
+        model = Inflated_ConvNext    
+    elif opt.model == 'convnext':
         model = ConvNext3D.convnext_tiny()
     elif opt.model == 'c3d':
         from models.c3d import get_fine_tuning_parameters
