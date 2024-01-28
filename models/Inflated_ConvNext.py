@@ -134,6 +134,8 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     # Copy head weights
     C3D_model.head.weight.data = C2D_model.head.weight.data
     C3D_model.head.bias.data = C2D_model.head.bias.data
+
+    return C3D_model
     
 ConvNext_2D = convnext_tiny(weights='DEFAULT')
 ConvNext3D_temp = ConvNeXt3D()
