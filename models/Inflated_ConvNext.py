@@ -254,7 +254,7 @@ class LayerNorm3D(nn.Module):
         x = self.weight[:, None, None] * x + self.bias[:, None, None]
         return x
 		
-def copy_weights_2d_to_3d(C2D_model, C3D_model):
+def ConvNext_tiny_inflated(**kwargs):   #copy_weights_2d_to_3d
     """
     Copy weights from pre-trained 2D ConvNext model to the modified 3D ConvNext model.
 
@@ -262,6 +262,8 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
         C2D_model (nn.Module): Pre-trained source model with 2D architecture.
         C3D_model (nn.Module): Destination model with modified 3D architecture.
     """
+    C3D_model = ConvNeXt3D(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
+    C2D_model = ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
     # Copy stem weights
     C3D_model.downsample_layers[0][0].weight.data = C2D_model.downsample_layers[0][0].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[0][0].weight.shape[2], 1, 1)
     C3D_model.downsample_layers[0][0].bias.data = C2D_model.downsample_layers[0][0].bias.data
@@ -287,7 +289,7 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     #C3D_model.head.weight.data = C2D_model.head.weight.data
     #C3D_model.head.bias.data = C2D_model.head.bias.data
 
-    #return C3D_model
+    return C3D_model
 
 
 copy_weights_2d_to_3d(convnext_tiny_2d(), ConvNeXt3D())
