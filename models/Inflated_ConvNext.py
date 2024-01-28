@@ -138,4 +138,4 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     return C3D_model
 
 
-Inflated_ConvNext3D = copy_weights_2d_to_3d(convnext_tiny(weights='DEFAULT'), ConvNeXt3D())
+Inflated_ConvNext3D = copy_weights_2d_to_3d(convnext_tiny(weights='DEFAULT'), ConvNeXt3D(num_classes=101))
