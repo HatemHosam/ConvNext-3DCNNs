@@ -132,8 +132,8 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
             C3D_model.stages[i][j].pwconv2.bias.data = C2D_model.stages[i][j].pwconv2.bias.data
 
     # Copy head weights
-    C3D_model.head.weight.data = C2D_model.head.weight.data
-    C3D_model.head.bias.data = C2D_model.head.bias.data
+    #C3D_model.head.weight.data = C2D_model.head.weight.data
+    #C3D_model.head.bias.data = C2D_model.head.bias.data
 
     return C3D_model
 
