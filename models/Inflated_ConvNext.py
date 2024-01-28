@@ -266,7 +266,7 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     C3D_model.downsample_layers[0][0].weight.data = C2D_model.downsample_layers[0][0].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[0][0].weight.shape[2], 1, 1)
     C3D_model.downsample_layers[0][0].bias.data = C2D_model.downsample_layers[0][0].bias.data
 
-    for i in range(3):
+    for i in range(1,4):
         # Copy downsample layer weights
         C3D_model.downsample_layers[i][1].weight.data = C2D_model.downsample_layers[i][1].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[i][1].weight.shape[2], 1, 1)
         C3D_model.downsample_layers[i][1].bias.data = C2D_model.downsample_layers[i][1].bias.data
