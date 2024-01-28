@@ -147,7 +147,6 @@ model_urls = {
     "convnext_xlarge_22k": "https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_224.pth",
 }
 
-@register_model
 def convnext_tiny_2d(pretrained=True,in_22k=False, **kwargs):
     model = ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768])
     if pretrained:
