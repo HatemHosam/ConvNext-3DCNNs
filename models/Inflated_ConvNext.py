@@ -162,7 +162,7 @@ class Block3D(nn.Module):
         super().__init__()
         # Adjusted dwconv layer to 3D
         self.dwconv = nn.Conv3d(dim, dim, kernel_size=(7, 7, 7), padding=(3, 3, 3), groups=dim)
-        self.norm = LayerNorm3D(dim)
+        self.norm = LayerNorm3D(dim, eps=1e-6)
         self.pwconv1 = nn.Conv3d(dim, 4 * dim, kernel_size=1) 
         self.act = nn.GELU()
         self.pwconv2 = nn.Conv3d(4 * dim, dim, kernel_size=1)
@@ -201,7 +201,7 @@ class ConvNeXt3D(nn.Module):
         for i in range(3):
             # Adjusted downsample layer to 3D with kernel size (2, 2, 2) and stride (2, 2, 2)
             downsample_layer = nn.Sequential(
-                LayerNorm3D(dims[i]),
+                LayerNorm3D(dims[i], eps=1e-6, data_format="channels_first"),
                 nn.Conv3d(dims[i], dims[i+1], kernel_size=(2, 2, 2), stride=(2, 2, 2)),
             )
             self.downsample_layers.append(downsample_layer)
@@ -217,7 +217,7 @@ class ConvNeXt3D(nn.Module):
             self.stages.append(stage)
             cur += depths[i]
 
-        self.norm = nn.LayerNorm(dims[-1]) 
+        self.norm = nn.LayerNorm(dims[-1], eps=1e-6) 
         self.head = nn.Linear(dims[-1], num_classes)
 
         self.apply(self._init_weights)
