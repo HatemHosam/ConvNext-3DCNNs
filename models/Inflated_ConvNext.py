@@ -291,5 +291,3 @@ def ConvNext_tiny_inflated(**kwargs):   #copy_weights_2d_to_3d
 
     return C3D_model
 
-
-copy_weights_2d_to_3d(convnext_tiny_2d(), ConvNeXt3D())
