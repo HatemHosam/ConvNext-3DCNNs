@@ -147,7 +147,7 @@ model_urls = {
     "convnext_xlarge_22k": "https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_224.pth",
 }
 
-connvnext_2d = ConvNeXt(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768])
+connvnext_2d = ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768])
 url = model_urls['convnext_tiny_1k']
 checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu", check_hash=True)
 connvnext_2d .load_state_dict(checkpoint["model"])
