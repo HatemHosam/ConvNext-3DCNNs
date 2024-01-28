@@ -137,4 +137,5 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
 
     return C3D_model
 
+print(ConvNeXt3D.downsample_layers)
 Inflated_ConvNext3D = copy_weights_2d_to_3d(convnext_tiny(weights='DEFAULT'), ConvNeXt3D())
