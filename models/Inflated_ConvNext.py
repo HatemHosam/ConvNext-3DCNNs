@@ -147,10 +147,10 @@ model_urls = {
     "convnext_xlarge_22k": "https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_224.pth",
 }
 
-
+connvnext_2d = ConvNeXt(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768])
 url = model_urls['convnext_tiny_1k']
 checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu", check_hash=True)
-ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768]).load_state_dict(checkpoint["model"])
+model.load_state_dict(checkpoint["model"])
 
 #***************************************************
 #****************************************************
@@ -297,4 +297,4 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     return C3D_model
 
 
-Inflated_ConvNext3D = copy_weights_2d_to_3d(ConvNeXt_2d(), ConvNeXt3D())
+Inflated_ConvNext3D = copy_weights_2d_to_3d(connvnext_2d, ConvNeXt3D())
