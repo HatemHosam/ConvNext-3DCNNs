@@ -251,7 +251,7 @@ class LayerNorm3D(nn.Module):
         u = x.mean(1, keepdim=True)
         s = (x - u).pow(2).mean(1, keepdim=True)
         x = (x - u) / torch.sqrt(s + self.eps)
-         x = self.weight[:, None, None, None] * x + self.bias[:, None, None, None]
+        x = self.weight[:, None, None, None] * x + self.bias[:, None, None, None]
         return x
 		
 def ConvNext_tiny_inflated(**kwargs):   #copy_weights_2d_to_3d
