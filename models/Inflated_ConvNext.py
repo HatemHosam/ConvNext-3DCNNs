@@ -268,8 +268,8 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
 
     for i in range(3):
         # Copy downsample layer weights
-        C3D_model.downsample_layers[i][0].weight.data = C2D_model.downsample_layers[i][0].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[i][0][1].weight.shape[2], 1, 1)
-        C3D_model.downsample_layers[i][0].bias.data = C2D_model.downsample_layers[i][0].bias.data
+        C3D_model.downsample_layers[i][0][1].weight.data = C2D_model.downsample_layers[i][0].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[i][0][1].weight.shape[2], 1, 1)
+        C3D_model.downsample_layers[i][0][1].bias.data = C2D_model.downsample_layers[i][0].bias.data
 
     # Copy block weights
     for i in range(4):
