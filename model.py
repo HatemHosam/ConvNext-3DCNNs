@@ -6,7 +6,7 @@ from models import c3d, squeezenet, mobilenet, shufflenet, mobilenetv2, shufflen
 
 def generate_model(opt):
     assert opt.model in ['c3d', 'squeezenet', 'mobilenet', 'resnext', 'resnet',
-                         'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext']
+                         'shufflenet', 'mobilenetv2', 'shufflenetv2', 'convnext', 'inflated_convnext']
     if opt.model == 'inflated_convnext':
         model = Inflated_ConvNext    
     elif opt.model == 'convnext':
