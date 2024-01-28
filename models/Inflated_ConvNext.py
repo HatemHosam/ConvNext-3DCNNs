@@ -148,7 +148,7 @@ model_urls = {
 }
 
 
-url = model_urls['convnext_tiny_22k'] if in_22k else model_urls['convnext_tiny_1k']
+url = model_urls['convnext_tiny_1k']
 checkpoint = torch.hub.load_state_dict_from_url(url=url, map_location="cpu", check_hash=True)
 ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs).load_state_dict(checkpoint["model"])
 
