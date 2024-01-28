@@ -195,7 +195,7 @@ class ConvNeXt3D(nn.Module):
         self.downsample_layers = nn.ModuleList() 
         stem = nn.Sequential(
             nn.Conv3d(in_chans, dims[0], kernel_size=(4, 4, 4), stride=(4, 4, 4)),
-            LayerNorm3D(dims[0])
+            LayerNorm3D(dims[0], eps=1e-6, data_format="channels_first")
         )
         self.downsample_layers.append(stem)
         for i in range(3):
