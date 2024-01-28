@@ -287,7 +287,7 @@ def copy_weights_2d_to_3d(C2D_model, C3D_model):
     #C3D_model.head.weight.data = C2D_model.head.weight.data
     #C3D_model.head.bias.data = C2D_model.head.bias.data
 
-    return C3D_model
+    #return C3D_model
 
 
-Inflated_ConvNext3D = copy_weights_2d_to_3d(convnext_tiny_2d(), ConvNeXt3D())
+copy_weights_2d_to_3d(convnext_tiny_2d(), ConvNeXt3D())
