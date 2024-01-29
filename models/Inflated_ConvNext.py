@@ -186,11 +186,11 @@ class Block3D(nn.Module):
         x = self.dwconv(x)
         x = x.permute(0, 2, 3, 4, 1) # (N, C, Z, H, W) -> (N, Z, H, W, C)
         x = self.norm(x)
-        #x = x .permute(0, 4, 1, 2, 3)
+        x = x .permute(0, 4, 1, 2, 3)
         x = self.pwconv1(x)
         x = self.act(x)
         x = self.pwconv2(x)
-        #x = x.permute(0, 2, 3, 4, 1)
+        x = x.permute(0, 2, 3, 4, 1)
         if self.gamma is not None:
             x = self.gamma * x
         x = x.permute(0, 4, 1, 2, 3) # (N, Z, H, W, C) -> (N, C, Z, H, W)
