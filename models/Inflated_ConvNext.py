@@ -171,7 +171,7 @@ class Block3D(nn.Module):
     def __init__(self, dim, drop_path=0., layer_scale_init_value=1e-6):
         super().__init__()
         self.dwconv = nn.Conv3d(dim, dim, kernel_size=7, padding=3, groups=dim) # depthwise conv
-        self.norm = LayerNorm(dim, eps=1e-6)
+        self.norm = LayerNorm3D(dim, eps=1e-6)
         #self.pwconv1 = nn.Linear(dim, 4 * dim) # pointwise/1x1 convs, implemented with linear layers
         self.pwconv1 = nn.Conv3d(dim, 4 * dim, kernel_size=1, groups=dim)
         self.act = nn.GELU()
