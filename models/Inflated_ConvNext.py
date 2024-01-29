@@ -298,7 +298,7 @@ def ConvNext_tiny_inflated(**kwargs):   #copy_weights_2d_to_3d
         C3D_model (nn.Module): Destination model with modified 3D architecture.
     """
     C3D_model = ConvNeXt3D(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
-    C2D_model = ConvNeXt_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
+    C2D_model = convnext_tiny_2d(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
     # Copy stem weights
     C3D_model.downsample_layers[0][0].weight.data = C2D_model.downsample_layers[0][0].weight.data.unsqueeze(2).repeat(1, 1, C3D_model.downsample_layers[0][0].weight.shape[2], 1, 1)
     C3D_model.downsample_layers[0][0].bias.data = C2D_model.downsample_layers[0][0].bias.data
