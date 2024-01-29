@@ -311,7 +311,7 @@ def ConvNext_tiny_inflated(**kwargs):   #copy_weights_2d_to_3d
     # Copy block weights
     for i in range(4):
         for j in range(len(C3D_model.stages[i])):
-            C3D_model.stages[i][j].dwconv.weight.data[:, :, 1, :, :] = C2D_model.stages[i][j].dwconv.weight.data
+            C3D_model.stages[i][j].dwconv.weight.data[:, :, 3, :, :] = C2D_model.stages[i][j].dwconv.weight.data
             C3D_model.stages[i][j].dwconv.bias.data = C2D_model.stages[i][j].dwconv.bias.data
 
             C3D_model.stages[i][j].pwconv1.weight.data = C2D_model.stages[i][j].pwconv1.weight.data.unsqueeze(2).repeat(1, 1, C3D_model.stages[i][j].pwconv1.weight.shape[2], 1, 1)
