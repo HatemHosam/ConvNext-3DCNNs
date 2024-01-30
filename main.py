@@ -104,13 +104,13 @@ if __name__ == '__main__':
             dampening = 0
         else:
             dampening = opt.dampening
-        optimizer = optim.SGD(
+        optimizer = optim.AdamW(
             parameters,
             lr=opt.learning_rate,
-            momentum=opt.momentum,
-            dampening=dampening,
-            weight_decay=opt.weight_decay,
-            nesterov=opt.nesterov)
+            #momentum=opt.momentum,
+            #dampening=dampening,
+            weight_decay=opt.weight_decay)
+            #nesterov=opt.nesterov)
         scheduler = lr_scheduler.ReduceLROnPlateau(
             optimizer, 'min', patience=opt.lr_patience)
     if not opt.no_val:
