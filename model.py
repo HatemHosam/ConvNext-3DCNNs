@@ -145,9 +145,10 @@ def generate_model(opt):
                                 nn.ReLU(inplace=True),
                                 nn.AvgPool3d((1,4,4), stride=1))
                 model.module.classifier = model.module.classifier.cuda()
-            else:
+            elif opt.model in ['c3d', 'resnext', 'resnet']:
                 model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
-                model.module.fc = model.module.fc.cuda()
+            else:
+                model = model
 
             #parameters = get_fine_tuning_parameters(model, opt.ft_portion)
             #return model, parameters
