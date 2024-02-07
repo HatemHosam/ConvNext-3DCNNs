@@ -145,12 +145,11 @@ def generate_model(opt):
                                 nn.ReLU(inplace=True),
                                 nn.AvgPool3d((1,4,4), stride=1))
                 model.module.classifier = model.module.classifier.cuda()
-            elif opt.model in ['c3d', 'resnext', 'resnet']:
-                model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
             else:
-                model = model
+                model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
+                model.module.fc = model.module.fc.cuda()
 
-            parameters = model.parameters() #get_fine_tuning_parameters(model, opt.ft_portion)
+            parameters = get_fine_tuning_parameters(model, opt.ft_portion)
             return model, parameters
     else:
         if opt.pretrain_path:
@@ -170,12 +169,10 @@ def generate_model(opt):
                                 nn.Conv3d(model.module.classifier[1].in_channels, opt.n_finetune_classes, kernel_size=1),
                                 nn.ReLU(inplace=True),
                                 nn.AvgPool3d((1,4,4), stride=1))
-            elif opt.model in ['c3d', 'resnext', 'resnet']:
-                model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
             else:
-                model = model
+                model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
 
-            parameters = model.parameters() #get_fine_tuning_parameters(model, opt.ft_begin_index)
+            parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
             return model, parameters
 
     return model, model.parameters()
