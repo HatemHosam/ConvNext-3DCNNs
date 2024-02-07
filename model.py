@@ -169,10 +169,10 @@ def generate_model(opt):
                                 nn.Conv3d(model.module.classifier[1].in_channels, opt.n_finetune_classes, kernel_size=1),
                                 nn.ReLU(inplace=True),
                                 nn.AvgPool3d((1,4,4), stride=1))
-            elif opt.model in ['c3d', 'resnext', 'resnet']
+            elif opt.model in ['c3d', 'resnext', 'resnet']:
                 model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
             else:
-                model = Inflated_ConvNext.ConvNext_tiny_inflated()
+                model = model
 
             #parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
             #return model, parameters
