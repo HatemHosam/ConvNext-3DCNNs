@@ -150,8 +150,8 @@ def generate_model(opt):
             else:
                 model = model
 
-            #parameters = get_fine_tuning_parameters(model, opt.ft_portion)
-            #return model, parameters
+            parameters = model.parameters() #get_fine_tuning_parameters(model, opt.ft_portion)
+            return model, parameters
     else:
         if opt.pretrain_path:
             print('loading pretrained model {}'.format(opt.pretrain_path))
@@ -175,7 +175,7 @@ def generate_model(opt):
             else:
                 model = model
 
-            #parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
-            #return model, parameters
+            parameters = model.parameters() #get_fine_tuning_parameters(model, opt.ft_begin_index)
+            return model, parameters
 
     return model, model.parameters()
