@@ -146,10 +146,11 @@ def generate_model(opt):
                                 nn.AvgPool3d((1,4,4), stride=1))
                 model.module.classifier = model.module.classifier.cuda()
             else:
-                model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
-                model.module.fc = model.module.fc.cuda()
+                #model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
+                #model.module.fc = model.module.fc.cuda()
+                model = model
 
-            parameters = get_fine_tuning_parameters(model, opt.ft_portion)
+            parameters = model.parameters() #get_fine_tuning_parameters(model, opt.ft_portion)
             return model, parameters
     else:
         if opt.pretrain_path:
@@ -170,9 +171,10 @@ def generate_model(opt):
                                 nn.ReLU(inplace=True),
                                 nn.AvgPool3d((1,4,4), stride=1))
             else:
-                model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
+                #model.module.fc = nn.Linear(model.module.fc.in_features, opt.n_finetune_classes)
+                model = model
 
-            parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
+            parameters = model.parameters() #get_fine_tuning_parameters(model, opt.ft_begin_index)
             return model, parameters
 
     return model, model.parameters()
